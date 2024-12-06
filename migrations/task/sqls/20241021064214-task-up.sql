@@ -347,3 +347,4 @@ from "COURSE_BOOKING"
 where "COURSE_BOOKING".created_at >= '2024-11-01 00:00:00' 
 and "COURSE_BOOKING".created_at <= '2024-11-30 23:59:59' 
 and "COURSE_BOOKING".status != '課程已取消';
+
