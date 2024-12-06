@@ -20,27 +20,27 @@ VALUES ('李燕容','lee2000@hexschooltest.io','USER'),
 ('肌肉棒子','muscle@hexschooltest.io','USER'),
 ('好野人','richman@hexschooltest.io','USER'),
 ('Q太郎','starplatinum@hexschooltest.io','USER'),
-('透明人','opcatiy0@hexschooltest.io','USER')
+('透明人','opcatiy0@hexschooltest.io','USER');
 
 
 -- 1-2 修改：用 Email 找到 李燕容、肌肉棒子、Q太郎，如果他的 Role 為 USER 將他的 Role 改為 COACH
 
 update "USER" 
 set role = 'COACH'
-where email in ('lee2000@hexschooltest.io','muscle@hexschooltest.io','starplatinum@hexschooltest.io')
+where email in ('lee2000@hexschooltest.io','muscle@hexschooltest.io','starplatinum@hexschooltest.io');
 
 -- 1-3 刪除：刪除USER 資料表中，用 Email 找到透明人，並刪除該筆資料
 
 delete from "USER" 
-where email = 'opcatiy0@hexschooltest.io'
+where email = 'opcatiy0@hexschooltest.io';
 
 -- 1-4 查詢：取得USER 資料表目前所有用戶數量（提示：使用count函式）
 
-select count(*) from "USER" 
+select count(*) from "USER" ;
 
 -- 1-5 查詢：取得 USER 資料表所有用戶資料，並列出前 3 筆（提示：使用limit語法）
 
-select * from "USER" limit(3) 
+select * from "USER" limit(3) ;
 
 
 --  ████████  █████   █    ████  
@@ -58,7 +58,7 @@ select * from "USER" limit(3)
 insert into "CREDIT_PACKAGE" (name,credit_amount,price)
 values ('7 堂組合包方案',7,1400),
 ('14 堂組合包方案',14,2520),
-('21 堂組合包方案',21,4800)
+('21 堂組合包方案',21,4800);
 
 -- 2-2. 新增：在 `CREDIT_PURCHASE` 資料表，新增三筆資料：（請使用 name 欄位做子查詢）
     -- 1. `王小明` 購買 `14 堂組合包方案`
@@ -95,7 +95,7 @@ values ((select id from "USER" where email = 'wXlTq@hexschooltest.io'),
 insert into "COACH" (user_id, experience_years) values 
 ((select id from "USER" where email = 'lee2000@hexschooltest.io'), 2),
 ((select id from "USER" where email = 'muscle@hexschooltest.io'), 2),
-((select id from "USER" where email = 'starplatinum@hexschooltest.io'), 2)
+((select id from "USER" where email = 'starplatinum@hexschooltest.io'), 2);
 
 -- 3-2. 新增：承1，為三名教練新增專長資料至 `COACH_LINK_SKILL` ，資料需求如下：
     -- 1. 所有教練都有 `重訓` 專長
@@ -126,7 +126,7 @@ insert into "COACH_LINK_SKILL" (coach_id, skill_id) values
 (
   (select id from "COACH" where user_id = (select id from "USER" where email = 'starplatinum@hexschooltest.io')),
   (select id from "SKILL" where name = '復健訓練')
-)
+);
 
 
 -- 3-3 修改：更新教練的經驗年數，資料需求如下：
@@ -226,7 +226,7 @@ insert into "COURSE_BOOKING" (user_id,course_id,booking_at,status) values
 ((select id from "USER" where email = 'wXlTq@hexschooltest.io'),
 	(select id from "COURSE" where user_id = (select id from "USER" where email = 'lee2000@hexschooltest.io')),
 	'2024-11-24 17:10:25',
-	'即將授課')
+	'即將授課');
 
 -- 5-4. 查詢：取得王小明所有的預約紀錄，包含取消預約的紀錄
 
@@ -254,7 +254,7 @@ select
 sum("CREDIT_PURCHASE".purchased_credits) as total
 from "CREDIT_PURCHASE" 
 where "CREDIT_PURCHASE".user_id = (select id from "USER" where email = 'wXlTq@hexschooltest.io')
-group by "CREDIT_PURCHASE".user_id
+group by "CREDIT_PURCHASE".user_id;
 
 -- 5-7. 查詢：計算用戶王小明的已使用堂數，顯示須包含以下欄位： user_id , total。 (需使用到 Count 函式與 Group By)
 
